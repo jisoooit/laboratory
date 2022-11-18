@@ -24,6 +24,9 @@ public class Member {
     @NonNull
     private String email;
 
+    @Enumerated(value = EnumType.STRING)
+    private Gender gender;
+
     @Column(updatable = false)
     private LocalDateTime createdAt;
 

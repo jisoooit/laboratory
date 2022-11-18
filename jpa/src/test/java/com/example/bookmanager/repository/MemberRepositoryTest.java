@@ -1,5 +1,6 @@
 package com.example.bookmanager.repository;
 
+import com.example.bookmanager.domain.Gender;
 import com.example.bookmanager.domain.Member;
 import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.Test;
@@ -122,7 +123,18 @@ class MemberRepositoryTest {
         memberRepository.save(member2);
     }
 
+    @Test
+    void enumTest() {
+        Member member = memberRepository.findById(1L).orElseThrow(RuntimeException::new);
+        member.setGender(Gender.MALE);
 
+        memberRepository.save(member);
+
+        memberRepository.findAll().forEach(System.out::println);
+
+        System.out.println(memberRepository.findRawRecord().get("gender"));
+        List<String> list = Lists.newArrayList("one","another", null, "one_more");
+    }
     private Sort getSort(){
         return Sort.by(
                 Sort.Order.desc("id"),
