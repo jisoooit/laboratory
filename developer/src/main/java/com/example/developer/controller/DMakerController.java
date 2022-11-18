@@ -26,15 +26,14 @@ public class DMakerController {
         return Arrays.asList("snow", "grace", "elsa");
     }
 
-    @PostMapping("/create-developers")
-    public List<String> createDevelopers(
+    @PostMapping("/create-developer")
+    public CreateDeveloper.Response createDevelopers(
             @Valid @RequestBody CreateDeveloper.Request request
             ) {
         log.info("request: {}", request);
 
-        dMakerService.createDeveloper(request);
+        return  dMakerService.createDeveloper(request);
 
-        return List.of("elsa");
     }
 
 }

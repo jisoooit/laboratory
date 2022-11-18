@@ -1,5 +1,6 @@
 package com.example.developer.dto;
 
+import com.example.developer.entity.Developer;
 import com.example.developer.type.DeveloperLevel;
 import com.example.developer.type.DeveloperSkillType;
 import lombok.*;
@@ -49,5 +50,14 @@ public class CreateDeveloper {
         private Integer experienceYear;
 
         private String memberId;
+
+        public static Response fromEntity(Developer developer){
+            return  Response.builder()
+                    .developerLevel(developer.getDeveloperLevel())
+                    .developerSkillType(developer.getDeveloperSkillType())
+                    .experienceYear(developer.getExperienceYears())
+                    .memberId(developer.getMemberId())
+                    .build();
+        }
     }
 }
