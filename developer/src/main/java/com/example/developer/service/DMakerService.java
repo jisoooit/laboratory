@@ -3,6 +3,7 @@ package com.example.developer.service;
 import com.example.developer.dto.CreateDeveloper;
 import com.example.developer.dto.DeveloperDetailDto;
 import com.example.developer.dto.DeveloperDto;
+import com.example.developer.dto.EditDeveloper;
 import com.example.developer.entity.Developer;
 import com.example.developer.exception.DMakerException;
 import com.example.developer.repository.DeveloperRepository;
@@ -47,20 +48,11 @@ public class DMakerService {
     }
 
     private void validateCreateDeveloperRequest(CreateDeveloper.Request request) {
-        DeveloperLevel developerLevel = request.getDeveloperLevel();
-        Integer experienceYear = request.getExperienceYear();
-        if (developerLevel == DeveloperLevel.SENIOR
-                && experienceYear < 10) {
-            throw new DMakerException(LEVEL_EXPERIENCE_YEARS_NOT_MATCHED);
-        }
-        if (developerLevel == DeveloperLevel.JUNGNIOR
-                && experienceYear < 4 || experienceYear > 10) {
-                throw new DMakerException(LEVEL_EXPERIENCE_YEARS_NOT_MATCHED);
-        }
-        if(developerLevel == DeveloperLevel.JUNIOR
-        && experienceYear > 4){
-            throw new DMakerException(LEVEL_EXPERIENCE_YEARS_NOT_MATCHED);
-        }
+
+        validateDeveloperLevel(
+                request.getDeveloperLevel(),
+                request.getExperienceYear()
+        );
 
         developerRepository.findByMemberId(request.getMemberId())
                 .ifPresent((developer -> {
@@ -72,6 +64,42 @@ public class DMakerService {
         return developerRepository.findByMemberId(memberId)
                 .map(DeveloperDetailDto::fromEntity)
                 .orElseThrow(()-> new DMakerException(NO_DEVELOPER));
+    }
+
+    @Transactional
+    public DeveloperDetailDto editDeveloper(String memberId, EditDeveloper.Request request) {
+        validateEditDeveloperRequest(request);
+        Developer developer = developerRepository.findByMemberId(memberId)
+                .orElseThrow(()-> new DMakerException(NO_DEVELOPER)
+        );
+
+        developer.setDeveloperLevel(request.getDeveloperLevel());
+        developer.setDeveloperSkillType(request.getDeveloperSkillType());
+        developer.setExperienceYears(request.getExperienceYear());
+
+        return DeveloperDetailDto.fromEntity(developer);
+    }
+
+    private void validateEditDeveloperRequest(EditDeveloper.Request request) {
+        validateDeveloperLevel(
+                request.getDeveloperLevel(),
+                request.getExperienceYear()
+        );
+    }
+
+    private static void validateDeveloperLevel(DeveloperLevel developerLevel, Integer experienceYear) {
+        if (developerLevel == DeveloperLevel.SENIOR
+                && experienceYear < 10) {
+            throw new DMakerException(LEVEL_EXPERIENCE_YEARS_NOT_MATCHED);
+        }
+        if (developerLevel == DeveloperLevel.JUNGNIOR
+                && experienceYear < 4 || experienceYear > 10) {
+            throw new DMakerException(LEVEL_EXPERIENCE_YEARS_NOT_MATCHED);
+        }
+        if(developerLevel == DeveloperLevel.JUNIOR
+                && experienceYear > 4){
+            throw new DMakerException(LEVEL_EXPERIENCE_YEARS_NOT_MATCHED);
+        }
     }
 }
 
