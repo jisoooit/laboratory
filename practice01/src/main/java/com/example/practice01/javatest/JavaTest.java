@@ -1,4 +1,4 @@
-package com.example.practice01;
+package com.example.practice01.javatest;
 
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class JavaTest {
@@ -34,5 +35,7 @@ public class JavaTest {
 
         list.stream().forEach(System.out::println);
         list2.stream().forEach(System.out::println);
+
+
     }
 }
