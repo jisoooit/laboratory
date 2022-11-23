@@ -1,6 +1,7 @@
 package com.example.bookmanager.domain;
 
 import com.example.bookmanager.domain.listener.MyEntityListener;
+import com.example.bookmanager.domain.listener.MemberEntityListener;
 import lombok.*;
 
 import javax.persistence.*;
@@ -15,7 +16,7 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode
 @Builder
 @Entity
-@EntityListeners(MyEntityListener.class)
+@EntityListeners( value = {MyEntityListener.class, MemberEntityListener.class})
 public class Member implements  Auditable {
     @Id
     @GeneratedValue
