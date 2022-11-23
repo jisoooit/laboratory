@@ -1,5 +1,6 @@
 package com.example.bookmanager.domain;
 
+import com.example.bookmanager.domain.listener.MyEntityListener;
 import lombok.*;
 
 import javax.persistence.*;
@@ -14,7 +15,8 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode
 @Builder
 @Entity
-public class Member {
+@EntityListeners(MyEntityListener.class)
+public class Member implements  Auditable {
     @Id
     @GeneratedValue
     private long id;
@@ -30,9 +32,20 @@ public class Member {
     @Column(updatable = false)
     private LocalDateTime createdAt;
 
-    @Column(insertable = false)
+    //@Column(insertable = false)
     private LocalDateTime updatedAt;
 
     @Transient
     private String testData;
+
+//    @PrePersist
+//    public void prePersist() {
+//        this.createdAt = LocalDateTime.now();
+//        this.updatedAt = LocalDateTime.now();
+//    }
+//
+//    @PreUpdate
+//    public void preUpdate() {
+//        this.updatedAt = LocalDateTime.now();
+//    }
 }

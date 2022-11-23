@@ -143,4 +143,27 @@ class MemberRepositoryTest {
                 Sort.Order.asc("updatedAt")
         );
     }
+
+    @Test
+    void prePersistTest() {
+        Member member = new Member();
+        member.setEmail("elsa@naver.com");
+        member.setName("elsa");
+
+        memberRepository.save(member);
+
+        System.out.println(memberRepository.findByName("elsa"));
+    }
+
+    @Test
+    void preUpdateTest() {
+        Member member = memberRepository.findById(1L).orElseThrow(RuntimeException::new);
+
+        System.out.println("as-is: "+ member);
+
+        member.setName("elsssa");
+        memberRepository.save(member);
+
+        System.out.println("to-be : "+ memberRepository.findAll().get(0));
+    }
 }

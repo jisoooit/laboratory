@@ -47,7 +47,7 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
 
     List<Member> findByCreatedAtAfter(LocalDateTime yesterday);
 
-    List<Member> findByIdAfter(Long Id);
+    List<Member> findByIdAfter(Long id);
 
     List<Member> findByCreatedAtGreaterThan(LocalDateTime yesterday);
     List<Member> findByCreatedAtGreaterThanEqual(LocalDateTime yesterday);
