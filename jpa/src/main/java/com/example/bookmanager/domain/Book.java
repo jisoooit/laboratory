@@ -2,6 +2,9 @@ package com.example.bookmanager.domain;
 
 import com.example.bookmanager.domain.listener.MyEntityListener;
 import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
@@ -16,7 +19,7 @@ import java.time.LocalDateTime;
 @Setter
 @ToString
 @Builder
-@EntityListeners(MyEntityListener.class)
+@EntityListeners(AuditingEntityListener.class)
 public class Book implements Auditable {
 
     @Id
@@ -27,7 +30,9 @@ public class Book implements Auditable {
 
     private String author;
 
+    @CreatedDate
     private LocalDateTime createdAt;
 
+    @LastModifiedDate
     private LocalDateTime updatedAt;
 }
