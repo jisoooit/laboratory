@@ -12,15 +12,15 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
-@ToString
+@ToString(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @RequiredArgsConstructor
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = true)
 @Builder
 @Entity
-@EntityListeners( value = {AuditingEntityListener.class, MemberEntityListener.class})
-public class Member implements  Auditable {
+@EntityListeners( value = {MemberEntityListener.class})
+public class Member extends BaseEntity implements  Auditable {
     @Id
     @GeneratedValue
     private long id;
@@ -37,12 +37,12 @@ public class Member implements  Auditable {
     @CreatedDate
     private LocalDateTime createdAt;
 
-    //@Column(insertable = false)
-    @LastModifiedDate
-    private LocalDateTime updatedAt;
-
-    @Transient
-    private String testData;
+//    //@Column(insertable = false)
+//    @LastModifiedDate
+//    private LocalDateTime updatedAt;
+//
+//    @Transient
+//    private String testData;
 
 //    @PrePersist
 //    public void prePersist() {

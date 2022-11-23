@@ -17,10 +17,9 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Getter
 @Setter
-@ToString
+@ToString(callSuper = true)
 @Builder
-@EntityListeners(AuditingEntityListener.class)
-public class Book implements Auditable {
+public class Book extends BaseEntity implements Auditable {
 
     @Id
     @GeneratedValue
@@ -30,9 +29,9 @@ public class Book implements Auditable {
 
     private String author;
 
-    @CreatedDate
-    private LocalDateTime createdAt;
-
-    @LastModifiedDate
-    private LocalDateTime updatedAt;
+//    @CreatedDate
+//    private LocalDateTime createdAt;
+//
+//    @LastModifiedDate
+//    private LocalDateTime updatedAt;
 }

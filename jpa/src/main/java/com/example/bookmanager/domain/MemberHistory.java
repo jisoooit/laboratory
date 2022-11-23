@@ -10,10 +10,11 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Data
+@ToString(callSuper = true)
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @Entity
-@EntityListeners(AuditingEntityListener.class)
-public class MemberHistory implements  Auditable {
+public class MemberHistory extends BaseEntity implements  Auditable {
     @Id
     @GeneratedValue
     private long id;
@@ -27,11 +28,11 @@ public class MemberHistory implements  Auditable {
     @Enumerated(value = EnumType.STRING)
     private Gender gender;
 
-    @CreatedDate
-    private LocalDateTime createdAt;
-
-    @LastModifiedDate
-    private LocalDateTime updatedAt;
+//    @CreatedDate
+//    private LocalDateTime createdAt;
+//
+//    @LastModifiedDate
+//    private LocalDateTime updatedAt;
 
 
 }
