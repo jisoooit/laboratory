@@ -17,7 +17,7 @@ class BookReviewInfoRepositoryTest {
     @Test
     void crudTest() {
         BookReviewInfo bookReviewInfo = new BookReviewInfo();
-        bookReviewInfo.setBookId(1L);
+        //bookReviewInfo.setBookId(1L);
         bookReviewInfo.setAverageReviewScore(4.5f);
         bookReviewInfo.setReviewCnt(2);
 
@@ -28,33 +28,35 @@ class BookReviewInfoRepositoryTest {
 
     @Test
     void crudTest2() {
-        givenBook();
         givenBookReviewInfo();
 
-        Book result = bookRepository.findById(
-                bookReviewInfoRepository
+        Book result = bookReviewInfoRepository
                         .findById(1L)
                         .orElseThrow(RuntimeException::new)
-                        .getBookId()
-        ).orElseThrow(RuntimeException::new);
+                        .getBook();
 
         System.out.println(">>> "+ result);
+
+        BookReviewInfo result2 = bookRepository
+                .findById(1L)
+                .orElseThrow(RuntimeException::new)
+                .getBookReviewInfo();
+
+        System.out.println(">>>"+ result2);
     }
 
-    private void givenBook(){
+    private Book givenBook(){
         Book book = new Book();
         book.setName("클린코드");
         book.setAuthorId(1L);
         book.setPublisherId(1L);
 
-        bookRepository.save(book);
-
-        System.out.println(">>> " +bookRepository.findAll());
+        return bookRepository.save(book); //저장된 entity 바로 리턴해줌.
     }
 
     private void givenBookReviewInfo(){
         BookReviewInfo bookReviewInfo = new BookReviewInfo();
-        bookReviewInfo.setBookId(1L);
+        bookReviewInfo.setBook(givenBook());
         bookReviewInfo.setAverageReviewScore(4.5f);
         bookReviewInfo.setReviewCnt(2);
 
