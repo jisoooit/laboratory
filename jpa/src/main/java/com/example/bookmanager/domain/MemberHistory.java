@@ -19,6 +19,7 @@ public class MemberHistory extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name="member_id")
     private Long memberId;
 
     private String name;

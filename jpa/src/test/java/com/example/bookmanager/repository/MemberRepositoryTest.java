@@ -2,6 +2,7 @@ package com.example.bookmanager.repository;
 
 import com.example.bookmanager.domain.Gender;
 import com.example.bookmanager.domain.Member;
+import com.example.bookmanager.domain.MemberHistory;
 import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -183,5 +184,33 @@ class MemberRepositoryTest {
         memberRepository.save(member);
 
         memberHistoryRepository.findAll().forEach(System.out::println);
+    }
+
+    @Test
+    void memberRelationTest() {
+        Member member = new Member();
+        member.setName("elsa");
+        member.setEmail("elsa@naver.com");
+        member.setGender(Gender.FEMALE);
+
+        memberRepository.save(member);
+
+        member.setName("anna");
+        memberRepository.save(member);
+
+        member.setEmail("anna@gmail.com");
+        memberRepository.save(member);
+
+        //memberHistoryRepository.findAll().forEach(System.out::println);
+
+        List<MemberHistory> result = memberHistoryRepository.findByMemberId(
+                memberRepository.findByEmail("anna@gmail.com").getId()
+        );
+
+        result.forEach(System.out::println);
+
+        List<MemberHistory> result2 = memberRepository.findByEmail("anna@gmail.com").getMemberHistories();
+
+        result.forEach(System.out::println);
     }
 }

@@ -9,6 +9,8 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -32,6 +34,10 @@ public class Member extends BaseEntity{
 
     @Enumerated(value = EnumType.STRING)
     private Gender gender;
+
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name="member_id", insertable = false)
+    private List<MemberHistory> memberHistories = new ArrayList<>(); //null 발생하지 않도록 기본 리스트 생성해줌.
 
 //    @Column(updatable = false)
 //    @CreatedDate
