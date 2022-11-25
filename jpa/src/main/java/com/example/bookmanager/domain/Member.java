@@ -20,10 +20,10 @@ import java.time.LocalDateTime;
 @Builder
 @Entity
 @EntityListeners( value = {MemberEntityListener.class})
-public class Member extends BaseEntity implements  Auditable {
+public class Member extends BaseEntity{
     @Id
-    @GeneratedValue
-    private long id;
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @NonNull
     private String name;
@@ -33,9 +33,9 @@ public class Member extends BaseEntity implements  Auditable {
     @Enumerated(value = EnumType.STRING)
     private Gender gender;
 
-    @Column(updatable = false)
-    @CreatedDate
-    private LocalDateTime createdAt;
+//    @Column(updatable = false)
+//    @CreatedDate
+//    private LocalDateTime createdAt;
 
 //    //@Column(insertable = false)
 //    @LastModifiedDate
@@ -44,14 +44,5 @@ public class Member extends BaseEntity implements  Auditable {
 //    @Transient
 //    private String testData;
 
-//    @PrePersist
-//    public void prePersist() {
-//        this.createdAt = LocalDateTime.now();
-//        this.updatedAt = LocalDateTime.now();
-//    }
-//
-//    @PreUpdate
-//    public void preUpdate() {
-//        this.updatedAt = LocalDateTime.now();
-//    }
+
 }

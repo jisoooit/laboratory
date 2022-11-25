@@ -14,10 +14,10 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @Entity
-public class MemberHistory extends BaseEntity implements  Auditable {
+public class MemberHistory extends BaseEntity {
     @Id
-    @GeneratedValue
-    private long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private Long memberId;
 
@@ -27,12 +27,5 @@ public class MemberHistory extends BaseEntity implements  Auditable {
 
     @Enumerated(value = EnumType.STRING)
     private Gender gender;
-
-//    @CreatedDate
-//    private LocalDateTime createdAt;
-//
-//    @LastModifiedDate
-//    private LocalDateTime updatedAt;
-
 
 }
