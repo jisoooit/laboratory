@@ -211,6 +211,8 @@ class MemberRepositoryTest {
 
         List<MemberHistory> result2 = memberRepository.findByEmail("anna@gmail.com").getMemberHistories();
 
-        result.forEach(System.out::println);
+        result2.forEach(System.out::println);
+
+        System.out.println("MemberHistory.getMember() : "+memberHistoryRepository.findAll().get(0).getMember());
     }
 }

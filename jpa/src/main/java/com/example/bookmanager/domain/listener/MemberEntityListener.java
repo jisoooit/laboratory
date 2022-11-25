@@ -21,10 +21,9 @@ public class MemberEntityListener {
         Member member = (Member) o;
 
         MemberHistory memberHistory = new MemberHistory();
-        memberHistory.setMemberId(member.getId());
         memberHistory.setName(member.getName());
         memberHistory.setEmail(member.getEmail());
-        memberHistory.setGender(member.getGender());
+        memberHistory.setMember(member);
 
         memberHistoryRepository.save(memberHistory);
     }

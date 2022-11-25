@@ -37,6 +37,7 @@ public class Member extends BaseEntity{
 
     @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name="member_id", insertable = false)
+    @ToString.Exclude
     private List<MemberHistory> memberHistories = new ArrayList<>(); //null 발생하지 않도록 기본 리스트 생성해줌.
 
 //    @Column(updatable = false)
