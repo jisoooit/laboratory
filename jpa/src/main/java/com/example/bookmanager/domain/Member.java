@@ -40,6 +40,11 @@ public class Member extends BaseEntity{
     @ToString.Exclude
     private List<MemberHistory> memberHistories = new ArrayList<>(); //null 발생하지 않도록 기본 리스트 생성해줌.
 
+    @OneToMany
+    @JoinColumn(name="member_id")
+    @ToString.Exclude
+    private List<Review> reviews = new ArrayList<>();
+
 //    @Column(updatable = false)
 //    @CreatedDate
 //    private LocalDateTime createdAt;

@@ -49,7 +49,7 @@ class BookReviewInfoRepositoryTest {
         Book book = new Book();
         book.setName("클린코드");
         book.setAuthorId(1L);
-        book.setPublisherId(1L);
+        //book.setPublisherId(1L);
 
         return bookRepository.save(book); //저장된 entity 바로 리턴해줌.
     }
