@@ -18,8 +18,19 @@ public class OptionalTest {
         Optional<Member> maybeNotMember = Optional.ofNullable(null);
 
         System.out.println(maybeMember.get());
-        System.out.println(">>>" + maybeNotMember.orElse(defaultMember));
+        System.out.println(maybeNotMember.orElse(defaultMember));
         System.out.println(maybeNotMember.orElseGet(() -> defaultMember));
+
+
+        //orElse orElseGet 비교
+        String checkName = "steve";
+        String nonName=null;
+        String result = Optional.ofNullable(checkName).orElse(defaultName());
+        System.out.println("orElse" + result);
+
+        result = Optional.ofNullable(checkName).orElseGet(OptionalTest::defaultName);
+        System.out.println("orElseGet" + result);
+
 
         //optional을 사용해서 효율적으로 코드 쓰기
 
@@ -58,7 +69,10 @@ public class OptionalTest {
         });
 
     }
-
+    public static String defaultName(){
+        System.out.println("return default name");
+        return "default name";
+    }
     public static <T> Optional<T> getAsOptional(List<T> list, int index){
         try{
             return Optional.of(list.get(index));
